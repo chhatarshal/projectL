@@ -30,7 +30,7 @@ const NewEntry = (props:any) => {
     const [email, setEmail] = useState("");
     const [mobileno, setMobile] = useState("");
 
-    const submitValue = (e) => {
+    const submitValue = (e:any) => {
         async function  add() {
             const doc = await addDoc(
                 collection(db, "clients", 'csingh', "infos"), {
