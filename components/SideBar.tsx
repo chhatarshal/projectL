@@ -44,7 +44,7 @@ const SideBar = () => {
                 </div>
 
                 <div className="flex">
-                    <Link href="/" className="shadow-lg cursor-pointer hover:bg-gray-400 rounded-lg p-2 bg-gray-200 text-black">
+                    <Link href="/" onClick={() => {signOut()}} className="shadow-lg cursor-pointer hover:bg-gray-400 rounded-lg p-2 bg-gray-200 text-black">
                         <div className="p-4 cursor-pointer">
                             <PowerIcon className="text-black h-10 w-10" />
                         </div>

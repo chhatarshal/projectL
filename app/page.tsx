@@ -3,18 +3,18 @@ import { EnvelopeOpenIcon, ExclamationTriangleIcon, SunIcon, UserPlusIcon } from
 import { JSXElementConstructor, ReactElement, ReactFragment, useState } from "react";
 import NewEntry from '../components/NewEntry';
 import { useCallback, useEffect } from 'react';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import ClientsList from '../components/ClientsList';
-
+ 
 
 import { usePathname, useRouter } from "next/navigation";
 
 const HomePage = () => {
     
     let list:any = [];
-    
+    const data = useSession();
 
-    const [data, setData] = useState([]);
+    //const [data, setData] = useState([]);
     const [newEntry, setNewEntry] = useState(false);
     const [openclient, setOpenClient] = useState(false);
     const [openclientId, setOpenclientId] = useState(0);
@@ -29,19 +29,10 @@ const HomePage = () => {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-          const result = await fetch(
-            "https://dummyjson.com/users"
-          );
-          const newResult = await result.json();
-          
-
-          //console.log(newResult)
-          setData(newResult.users);
-         
-        };
-     
-        fetchData();
+      console.log('===data ', data);
+         if (!data) {
+          router.push('/Login')
+         }
       }, []);
 
      let addNewEntry = (d:any) => {
@@ -67,7 +58,7 @@ const HomePage = () => {
     //setOpenClient(!openclient);
  }
         
-    return  <div className="flex flex-col border-b-4 text-yellow-50 overflow-scroll h-screen w-full">                               
+    return  (<div className="flex flex-col border-b-4 text-yellow-50 overflow-scroll h-screen w-full">                               
                 <div className='flex content-between justify-between mt-10 mx-4'>
                     <div className='shadow-lg cursor-pointer hover:bg-gray-400 rounded-lg p-2 bg-gray-200 text-black my-4' onClick={() => {addNewEntry()}}>
                       <UserPlusIcon className='h-10 w-10' />
@@ -77,10 +68,10 @@ const HomePage = () => {
               
                 {!newEntry &&
                   <div>                  
-                  {!openclient && <ClientsList props={data} openingClient={openingClient}/>}
+                  {!openclient && <ClientsList openingClient={openingClient}/>}
                   
                 </div>}                             
-            </div>
+            </div>)
 }
 export default HomePage;
 

@@ -30,7 +30,7 @@ const NewEntry = (props:any) => {
     const [email, setEmail] = useState("");
     const [mobileno, setMobile] = useState("");
 
-    const submitValue = (e:any) => {
+    const submitValue = (e) => {
         async function  add() {
             const doc = await addDoc(
                 collection(db, "clients", 'csingh', "infos"), {
@@ -44,6 +44,7 @@ const NewEntry = (props:any) => {
         }
         add();
         e.preventDefault();
+        router.push('/');
        /// props.addEntry({firstName : name, lastName : name, age: age, title:name, id:name, address: address, email:email, phone: mobileno});        
     }
 
