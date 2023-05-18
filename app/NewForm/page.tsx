@@ -9,7 +9,7 @@ function ContactForm() {
     const [message, setMessage] = useState('');
     
     // Add form submission function here
-    const submitForm = (e) => {
+    const submitForm = (e:any) => {
        // e.preventDefault();
     }
   
